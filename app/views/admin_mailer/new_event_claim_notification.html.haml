@@ -1,0 +1,13 @@
+Коллеги, добрый день!
+%br
+На портале #{@user.full_name} из #{@user.organization} зарегистрировался на событие #{@event.name}
+%br
+Регистрационные данные:
+
+#{@user.full_name}
+
+#{@user.email}
+%br
+Вы можете разрешить регистрацию на событие перейдя по ссылке: <noindex>#{link_to @claim_url, @claim_url, target: :_blank}</noindex>
+%br
+Или оставить письмо без движения.

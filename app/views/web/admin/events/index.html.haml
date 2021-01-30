@@ -1,0 +1,30 @@
+.container
+  = render 'web/admin/shared/notification'
+  %h1 Календарь
+  = link_to "Добавить событие", new_admin_event_path, class: "btn btn-info"
+  = link_to "Заявки на события", admin_events_claims_path, class: "btn btn-success"
+
+  = render "web/admin/shared/toolbar", collection: @events, total_title: t('.total_event_count')
+
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :name
+        %th= sort_link @q, :date
+        %th= sort_link @q, :time
+        %th= sort_link @q, :place
+        %th= sort_link @q, :description
+        %th{style: 'width: 17%'} Управление
+    %tbody
+      - @events.each do |event|
+        %tr
+          %th= event.name
+          %th= event.date
+          %th= event.time
+          %th= event.place
+          %th= event.description
+          %th
+            = link_to [:edit, :admin, event], class: "btn btn-success", title: "Редактировать" do
+              = fa_icon "edit"
+            = link_to [:admin, event], data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+              = fa_icon "trash"

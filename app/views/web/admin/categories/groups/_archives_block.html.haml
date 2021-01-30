@@ -1,0 +1,24 @@
+- if archives.present?
+  %legend= t('.archives')
+  %h4
+    %span.badge.badge-secondary
+      = t('.archive_count', archives_count: archives.count)
+  .table-wrapper-scroll-y
+    %table.table.table-bordered.table-striped.groups-table
+      %thead
+        %tr
+          %th{scope: :col, style: "width: 5%"}= t('.id')
+          %th{scope: :col, style: "width: 50%"}= t('.customer_name')
+          %th{scope: :col, style: "width: 50%"}= t('.notes')
+          %th{scope: :col, style: "width: 10%"} Управление
+      %tbody
+        - archives.each do |archive|
+          %tr
+            %th{scope: :row}= link_to archive.id, edit_admin_category_group_archive_path(archive.group.category.id, archive.group.id, archive.id)
+            %td= archive.customer_name
+            %td= archive.notes
+            %th
+              = link_to edit_admin_category_group_archive_path(archive.group.category.id, archive.group.id, archive.id), class: "btn btn-success", title: "Редактировать" do
+                = fa_icon "edit"
+              = link_to admin_category_group_archive_path(archive.group.category.id, archive.group.id, archive.id), data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+                = fa_icon "trash"

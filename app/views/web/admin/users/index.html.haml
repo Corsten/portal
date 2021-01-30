@@ -1,0 +1,39 @@
+.container
+  = render 'web/admin/shared/notification'
+  %h1 Пользователи сайта
+  = link_to "Добавить пользователя сайта", new_admin_user_path, class: "btn btn-info"
+
+  %p= render "search"
+
+  = render "web/admin/shared/toolbar", collection: @users, total_title: t('.total_user_count')
+
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :id
+        %th= sort_link @q, :full_name
+        %th= sort_link @q, :email
+        %th= sort_link @q, :organization
+        %th= sort_link @q, :position
+        %th= sort_link @q, :created_at
+        %th{style: 'width: 17%'} Управление
+    %tbody
+      - @users.each do |user|
+        %tr
+          %th{scope: :row}= user.id
+          %th= user.full_name
+          %th= user.email
+          %th= user.organization
+          %th= user.position
+          %th= l user.created_at, format: :default
+          %th
+            = link_to [:edit, :admin, user], class: "btn btn-success", title: "Редактировать" do
+              = fa_icon "edit"
+            = link_to [:admin, user], data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+              = fa_icon "trash"
+            - if user.can_block?
+              = link_to [:block, :admin, user], method: :post, class: "btn btn-warning", title: "Блокировать" do
+                = fa_icon "lock"
+            - if user.can_unblock?
+              = link_to [:unblock, :admin, user], method: :post, class: "btn btn-warning", title: "Разблокировать" do
+                = fa_icon "unlock"

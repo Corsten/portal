@@ -1,0 +1,15 @@
+= render 'web/admin/shared/notification'
+.container
+  = simple_form_for [:admin, @group_member], html: { class: "form-horizontal" } do |f|
+    %legend= legend
+    = f.input :full_name
+    = f.input :position
+
+    = f.input :photo, as: :file, label: t(".photo")
+    = f.input :photo_cache, as: :hidden
+
+    - if f.object.photo.present?
+      %p= link_to t('.show_photo'), admin_file_path(f.object.photo), target: :_blank
+    .form-actions
+      = f.submit class: "btn btn-primary", value: btn_title
+      = link_to "Отмена", [:admin, :working_group_members], class: "btn"

@@ -1,0 +1,129 @@
+variables:
+  DOCKER_DRIVER: overlay
+  OC_USER: dworcker
+  OC_PASSWORD: S13Vew3xSa2vgRf
+  OC_HOST: 'https://172.30.0.1:443'
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ''
+  NODE_TLS_REJECT_UNAUTHORIZED: '0'
+  REGISTRY: "172.30.89.237:5000"
+  APP_IMAGE: "$REGISTRY/$NAMESPACE/app"
+  TEMP_IMAGE_TAG: "temp_$CI_PIPELINE_ID"
+  RELEASE_IMAGE_TAG: 'release'
+  BASE_TAG: 'base'
+
+stages:
+  - build
+  - test
+  - deploy
+  - clean
+
+image: "$REGISTRY/gitlab-runners-farm/gitlab-runner:latest"
+
+before_script:
+  - env
+  - export
+  - service docker start
+  - sleep 5
+  - docker info
+  - oc login -u $OC_USER -p $OC_PASSWORD $OC_HOST --insecure-skip-tls-verify
+  - docker login $REGISTRY -u `oc whoami` -p `oc whoami -t`
+
+build:
+  stage: build
+  retry: 2
+  variables:
+    NAMESPACE: 'portal'
+  script:
+    - 'docker build -f Dockerfile -t $APP_IMAGE:$TEMP_IMAGE_TAG .'
+    - 'docker push $APP_IMAGE:$TEMP_IMAGE_TAG'
+  tags:
+    - openshift-stage
+  only:
+    - /^release\/*/
+    - develop
+    - staging
+    - master
+
+test:
+  stage: test
+  retry: 2
+  image: '$APP_IMAGE:$TEMP_IMAGE_TAG'
+  services:
+  - postgres:10.6
+  variables:
+    NAMESPACE: 'portal'
+  before_script:
+    - env
+  script:
+  - env
+  - bundle exec rubocop
+  - bin/rails db:create db:migrate db:seed RAILS_ENV=test
+  - rails assets:precompile
+  - bundle exec rake test COVERAGE=1
+  coverage: '/\(\d+.\d+\%\) covered/'
+  tags:
+    - openshift-stage
+  only:
+    - /^release\/*/
+    - develop
+    - staging
+    - master
+
+clean:
+  stage: clean
+  retry: 2
+  variables:
+    NAMESPACE: 'portal'
+  script:
+     - "oc delete istag/app:$TEMP_IMAGE_TAG -n $NAMESPACE"
+  tags:
+    - openshift-stage
+  only:
+    - /^release\/*/
+    - develop
+    - staging
+    - master
+  when: always
+
+####===--- STAGING ---===###
+deploy_staging:
+  stage: deploy
+  retry: 2
+  variables:
+    NAMESPACE: 'portal'
+  environment:
+    name: staging
+    url: 'http://portal.ru/backend'
+  script:
+    - env
+    - 'docker pull $APP_IMAGE:$TEMP_IMAGE_TAG'
+    - 'docker tag $APP_IMAGE:$TEMP_IMAGE_TAG $APP_IMAGE:latest'
+    - 'docker push $APP_IMAGE'
+  tags:
+    - openshift-stage
+  only:
+    - staging
+####===--- STAGING ---===###
+
+####===--- PROD ---===###
+deploy_prod:
+  stage: deploy
+  variables:
+    NEXUS_REGISTRY: 'nexus-docker.ru:443'
+    PROD_APP_IMAGE: '$NEXUS_REGISTRY/portal-app:prod'
+    NAMESPACE: 'portal'
+  environment:
+    name: production
+    url: 'https://portal.ru'
+  script:
+    - 'docker pull $APP_IMAGE:$TEMP_IMAGE_TAG'
+    - 'docker tag $APP_IMAGE:$TEMP_IMAGE_TAG $PROD_APP_IMAGE'
+    - 'docker login $NEXUS_REGISTRY -u $OC_USER -p $OC_PASSWORD'
+    - 'docker push $PROD_APP_IMAGE'
+  tags:
+    - openshift-stage
+  only:
+    - master
+  retry: 2
+####===--- PROD ---===###

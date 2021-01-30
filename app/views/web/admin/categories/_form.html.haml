@@ -1,0 +1,18 @@
+.container
+  = simple_form_for [:admin, @category], html: { class: "form-horizontal" } do |f|
+    %legend= legend
+    = f.input :name
+
+    = f.input :enable_pilots
+    = f.input :enable_products
+    = f.input :enable_testing_methods
+    = f.input :enable_archives
+
+    = render 'web/admin/categories/groups_block', form: f, groups: f.object.groups
+    - if @category.id.present?
+      = link_to t('.add_category_group'), new_admin_category_group_path(@category.id), class: "btn btn-success"
+
+    .form-actions
+      %br
+      = f.submit class: "btn btn-primary", value: btn_title
+      = link_to "Отмена", [:admin, :categories], class: "btn"

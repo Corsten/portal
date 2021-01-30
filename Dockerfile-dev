@@ -1,0 +1,35 @@
+FROM ruby:2.6.1
+
+RUN apt-get update -qq && apt-get install -y curl
+
+ENV LC_ALL=ru_RU.utf8 LANGUAGE=ru_RU.utf8
+RUN apt-get install --assume-yes locales && \
+  echo 'ru_RU.UTF-8 UTF-8' >> /etc/locale.gen  && \
+  locale-gen ru_RU.UTF-8 && \
+  dpkg-reconfigure -fnoninteractive locales && \
+  update-locale LC_ALL="ru_RU.utf8" LANG="ru_RU.utf8" LANGUAGE="ru_RU" && \
+  echo "Europe/Moscow" > /etc/timezone && \
+  dpkg-reconfigure -f noninteractive tzdata
+
+# npm + yarn
+RUN curl --silent --location https://deb.nodesource.com/setup_8.x | bash - && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt-get install -y nodejs && \
+  npm install yarn -g
+
+# postgresql-client
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+  apt-get update -qq && \
+  apt-get -y install build-essential postgresql-client-10
+
+# openshift client
+RUN curl -L  https://github.com/openshift/origin/releases/download/v1.3.2/openshift-origin-client-tools-v1.3.2-ac1d579-linux-64bit.tar.gz | tar -xz && \
+    cp openshift-origin-client-tools-*/oc /usr/local/bin/.
+
+RUN mkdir /app
+WORKDIR /app
+ADD . /app
+
+RUN bundle install --jobs 4 --no-binstubs && yarn install

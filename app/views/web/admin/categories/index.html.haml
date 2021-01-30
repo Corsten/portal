@@ -1,0 +1,21 @@
+.container
+  %h1 Категории ПО
+  = link_to "Добавить категорию", new_admin_category_path, class: "btn btn-info"
+  %br
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :id
+        %th= sort_link @q, :name
+        %th Управление
+    %tbody
+      - @categories.each do |category|
+        %tr
+          %th{scope: :row}= link_to category.id, edit_admin_category_path(category.id)
+          %th= category.name
+          %th
+            = link_to [:edit, :admin, category], class: "btn btn-success", title: "Редактировать" do
+              = fa_icon "edit"
+
+            = link_to [:admin, category], data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+              = fa_icon "trash"

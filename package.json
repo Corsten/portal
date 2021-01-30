@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "private": true,
+  "scripts": {
+    "apidoc": "./node_modules/.bin/apidoc -i app/controllers/api -o public/backend/apidocs",
+    "swagger": "./node_modules/.bin/apidoc-swagger -f '.*\\.rb$' -i app/controllers -o public"
+  },
+  "dependencies": {
+    "apidoc": "^0.17.6",
+    "jquery-mask-plugin": "^1.14.15"
+  }
+}

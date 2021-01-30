@@ -1,0 +1,14 @@
+.form-group .form-control.error {
+  border: 1px solid #dc3545;
+}
+
+.form-group .form-control.error + label {
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+textarea.form-control.topics {
+    width: 500px;
+    margin-right: 10px;
+}

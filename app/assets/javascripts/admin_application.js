@@ -1,0 +1,11 @@
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require jquery-mask-plugin
+//= require jquery.validate.min
+//= require autosize.min.js
+//= require js-routes
+//= require moment
+//= require moment/ru.js
+//= require ./tempusdominus-bootstrap-4.js
+//= require ./admin/init

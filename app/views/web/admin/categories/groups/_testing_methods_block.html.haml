@@ -1,0 +1,24 @@
+- if testing_methods.present?
+  %legend= t('.testing_methods')
+  %h4
+    %span.badge.badge-secondary
+      = t('.testing_methods_count', testing_methods_count: testing_methods.count)
+  .table-wrapper-scroll-y
+    %table.table.table-bordered.table-striped.groups-table
+      %thead
+        %tr
+          %th{scope: :col, style: "width: 5%"}= t('.id')
+          %th{scope: :col, style: "width: 50%"}= t('.customer_name')
+          %th{scope: :col, style: "width: 50%"}= t('.notes')
+          %th{scope: :col, style: "width: 10%"} Управление
+      %tbody
+        - testing_methods.each do |testing_method|
+          %tr
+            %th{scope: :row}= link_to testing_method.id, edit_admin_category_group_testing_method_path(testing_method.group.category.id, testing_method.group.id, testing_method.id)
+            %td= testing_method.customer_name
+            %td= testing_method.notes
+            %th
+              = link_to edit_admin_category_group_testing_method_path(testing_method.group.category.id, testing_method.group.id, testing_method.id), class: "btn btn-success", title: "Редактировать" do
+                = fa_icon "edit"
+              = link_to admin_category_group_testing_method_path(testing_method.group.category.id, testing_method.group.id, testing_method.id), data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+                = fa_icon "trash"

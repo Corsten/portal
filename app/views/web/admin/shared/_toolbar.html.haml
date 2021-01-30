@@ -1,0 +1,11 @@
+.row
+  - if total_title
+    .col-sm-6
+      %h3
+        %br
+        %span.badge.badge-light.total-count
+          = total_title
+          = collection.total_count
+  .col-sm-6
+    .pull-right
+      = paginate collection, theme: 'twitter-bootstrap-4'

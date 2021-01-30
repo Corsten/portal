@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-sm-12
+      = link_to "Заявки на это событие", admin_events_claims_path(q: {event_id_eq: @event.id}), class: "btn btn-success"
+      = simple_form_for [:admin, @event], html: { class: "form-horizontal" } do |f|
+        %legend= legend
+        = f.input :name
+        = f.input :date, as: :datetimepicker, placeholder: false, input_html: { datepicker: true }
+        = f.input :time, as: :datetimepicker, placeholder: false, timepicker: true
+        = f.input :place
+        = f.input :description, as: :text
+        = f.input :state
+        = f.input :topics, as: :text, hint: 'Каждая тема должна начинаться со знака *, например: *Тема 1 *Тема 2 *Тема 3'
+        = f.input :address
+        = f.input :organizer
+
+        .form-actions
+
+          = f.submit class: "btn btn-primary", value: btn_title
+          = link_to "Отмена", [:admin, :events], class: "btn"

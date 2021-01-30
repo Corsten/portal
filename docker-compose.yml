@@ -1,0 +1,83 @@
+version: "2"
+
+volumes:
+  bundle:
+  store_uploads:
+
+services:
+  db:
+    image: postgres:10.6
+    container_name: rsr-db
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - ./docker/data/postgres:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: rsr/web
+    container_name: rsr-web
+    command: bash -c "bin/rails db:create db:migrate db:seed && bundle exec puma -p 8080"
+    volumes: &web-volumes
+      - ./:/app
+      - ~/.ssh:/root/.ssh
+      - ~/.bash_history:/root/.bash_history
+      - bundle:/usr/local/bundle
+      - store_uploads:/store/uploads
+    ports:
+      - "8080:8080"
+    links:
+      - db
+      - redis
+    environment: &web-environment
+      POSTGRESQL_HOST: db
+      NODE_ENV: development
+      RAILS_ENV: development
+      RACK_ENV: development
+      APP_ENV: development
+      RAILS_LOG_TO_STDOUT: 1
+      STORE_PATH: /store/uploads
+
+  redis:
+    image: redis
+    container_name: rsr-redis
+    command: "redis-server --appendonly yes"
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ./docker/data/redis:/data
+  workers:
+    image: rsr/web
+    container_name: rsr-workers
+    command: "bundle exec rake resque:work"
+    environment:
+      <<: *web-environment
+      VERBOSE: 1
+      QUEUE: '*'
+    links:
+      - redis
+    volumes: *web-volumes
+  scheduler:
+    image: rsr/web
+    volumes: *web-volumes
+    links:
+      - redis
+    command: bash -c "bundle exec rake resque:scheduler"
+    container_name: rsr-scheduler
+    environment: *web-environment
+  clockwork:
+    image: rsr/web
+    volumes: *web-volumes
+    links:
+      - redis
+    command: bash -c "bundle exec clockwork config/clock.rb"
+    container_name: rsr-clockwork
+    environment: *web-environment
+  mailcatcher:
+    build: docker/mailcatcher
+    image: hueta/mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025"

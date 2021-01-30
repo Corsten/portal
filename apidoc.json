@@ -1,0 +1,10 @@
+{
+  "name": "RSR-Api",
+  "version": "0.1.0",
+  "description": "RESTApi documentation",
+  "title": "RSR RESTApi documentation",
+  "url" : "",
+  "template": {
+    "withGenerator": true
+  }
+}

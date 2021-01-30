@@ -1,0 +1,26 @@
+ru:
+  reports:
+    titles:
+      map_report: Карта технологий
+      pilots_report: Реестр пилотов
+    columns:
+      category_name: Название категории
+      group_name: Название класса
+      name: Название ПО
+      manufacturer: Производитель ПО
+      link: Ссылка на ПО
+      document_link: Ссылка на файл с описанием опыта внедрения
+      customer_name: Наименование организации-заказчика
+      supplier_name: Наименование организации-поставщика (Внедренца)
+      software_name: Наименование ПО
+      manufacturer_name: Наименование компании-производителя
+      in_rsr: Наличие ПО в реестре Российского ПО
+      registry_link: Ссылка на реестр при наличии
+      leader_state: Лидер в классе (экспертно)
+      status: Статус
+      result: Результаты пилотирования/внедрения
+      unfunctional_requirements: Основные нефункциональные требования
+      functional_requirements: Основные функциональные требования
+      notes: Примечания
+      manufacturer_link: Ссылка на сайт производителя
+      customer_link: Ссылка на сайт заказчика

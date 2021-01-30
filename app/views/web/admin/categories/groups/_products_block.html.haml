@@ -1,0 +1,24 @@
+- if products.present?
+  %legend= t('.products')
+  %h4
+    %span.badge.badge-secondary
+      = t('.products_count', products_count: products.count)
+  .table-wrapper-scroll-y
+    %table.table.table-bordered.table-striped.groups-table
+      %thead
+        %tr
+          %th{scope: :col, style: "width: 5%"}= t('.id')
+          %th{scope: :col, style: "width: 5%"}= t('.rating')
+          %th{scope: :col, style: "width: 50%"}= t('.name')
+          %th{scope: :col, style: "width: 10%"} Управление
+      %tbody
+        - products.each do |product|
+          %tr
+            %th{scope: :row}= link_to product.id, edit_admin_category_group_product_path(product.group.category.id, product.group.id, product.id)
+            %td= product.rating
+            %td= product.name
+            %th
+              = link_to edit_admin_category_group_product_path(product.group.category.id, product.group.id, product.id), class: "btn btn-success", title: "Редактировать" do
+                = fa_icon "edit"
+              = link_to admin_category_group_product_path(product.group.category.id, product.group.id, product.id), data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+                = fa_icon "trash"

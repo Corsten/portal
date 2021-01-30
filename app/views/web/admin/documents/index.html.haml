@@ -1,0 +1,31 @@
+.container
+  = render 'web/admin/shared/notification'
+  %h1 Актуальные документы
+  = link_to "Добавить документ", new_admin_document_path, class: "btn btn-info"
+
+  = render "web/admin/shared/toolbar", collection: @documents, total_title: t('.total_document_count')
+
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :id
+        %th= sort_link @q, :name
+        %th= sort_link @q, :kind
+        %th= sort_link @q, :document_date
+        %th= sort_link @q, :document_link
+        %th{style: 'width: 17%'} Управление
+    %tbody
+      - @documents.each do |document|
+        %tr
+          %th{scope: :row}= document.id
+          %th= document.name
+          %th= document.kind_text
+          %th
+            - if document.document_date.present?
+              = l(document.document_date, format: :only_date)
+          %th= PathHelper.url_creator(document.document_link)
+          %th
+            = link_to [:edit, :admin, document], class: "btn btn-success", title: "Редактировать" do
+              = fa_icon "edit"
+            = link_to [:admin, document], data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+              = fa_icon "trash"

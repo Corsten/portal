@@ -1,0 +1,14 @@
+ru:
+  admin_mailer:
+    new_pilot_import_notification:
+      subject: Загружен новый опыт по проведению пилота.
+    new_user_notification:
+      subject: Новая заявка на регистрацию
+    new_testing_method_notification:
+      subject: Загружен новый опыт по проведению тестирования
+
+  user_mailer:
+    unblock_user_notification:
+      subject: Успешная регистрация на портале
+    restore_password:
+      subject: Восстановление пароля на портале

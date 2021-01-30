@@ -1,0 +1,15 @@
+!!! Strict
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    = stylesheet_link_tag 'foundation_emails'
+  %body
+    %img{:src => "https://dmg.digitaltarget.ru/1/6402/i/i?i=1&c=tg:source_mail%20campaign_RT1.cpuid:[[account_cval]]", :style => "opacity:0; height:0; width:0;"}/
+    %table.body{"data-made-with-foundation" => ""}
+      %tr
+        %td.center{:align => "center", :valign => "top"}
+          %center
+            %container
+              = yield
+            %spacer{:size => "16"}

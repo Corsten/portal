@@ -1,0 +1,18 @@
+ru:
+  api:
+    errors:
+      not_found: Запись не найдена
+      auth_error: Ошибка аутентификации
+      forbidden: Ошибка авторизации
+      validation_error: Ошибка валидации
+      file_uploading_error: Ошибка загрузки файла
+      not_registered_email: Указанная связка e-mail/логин не найдена на портале.
+      invalid_password: Вы не верно ввели пароль
+      invalid_confirmed_code: Неверный код подтверждения
+      token_check_error: Ошибка проверки токена
+      not_active_user: Ваши регистрационные данные были отправлены на валидацию, в случае возникновения вопросов вы можете связаться с нами по e-mail
+      confirmation_waiting: Ожидается подтверждение
+      claim_not_found: Событие не найдено
+      success_registration: Ваша заявка подтверждена
+      already_registered: Вы уже зарегистрированы на это событие
+      need_recover_password: "Ваш пароль устарел. Пожалуйста, воспользуйтесь формой обновления пароля: %{link}"

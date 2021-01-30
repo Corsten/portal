@@ -1,0 +1,23 @@
+%nav.navbar.custom-navbar.navbar-expand-lg.navbar-light.bg-ligth
+  %ul.navbar-nav.mx-auto
+    - if policy(Administrator).index?
+      %li.nav-item.dropdown
+        %a#navbarDropdown.nav-link.dropdown-toggle{ :href => '#', :title => 'Контент', :role => 'button', 'data-toggle' => "dropdown"} #{'Контент'}
+        .dropdown-menu{'aria-labelledby' => 'navbarDropdown'}
+          = link_to "Актуальные документы", admin_documents_path, class: 'dropdown-item'
+          = link_to "Календарь", admin_events_path, class: 'dropdown-item'
+          = link_to "Состав рабочей группы", admin_working_group_members_path, class: 'dropdown-item'
+    - if policy(Administrator).index?
+      %li.nav-item.border-nav
+        = active_link_to "Категории ПО", admin_categories_path, class: 'nav-link'
+    - if policy(Administrator).index?
+      %li.nav-item.border-nav
+        = active_link_to "Администраторы", admin_administrators_path, class: 'nav-link'
+    - if policy(User).index?
+      %li.nav-item.border-nav
+        = active_link_to "Пользователи сайта", admin_users_path, class: 'nav-link'
+  %ul.navbar-nav
+    %li
+      %div= present(current_administrator).surname_and_initials
+      %div= current_administrator.role_text
+      %div= link_to "Выйти", admin_session_path, method: :delete

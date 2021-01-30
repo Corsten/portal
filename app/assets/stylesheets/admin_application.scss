@@ -1,0 +1,20 @@
+@import "bootstrap";
+@import "admin/navbar_custom";
+@import "admin/form_signin";
+@import "admin/form";
+@import "admin/category_edit_form";
+@import "admin/user_edit_form";
+@import "admin/index_table";
+@import "font-awesome";
+@import "tempusdominus-bootstrap-4";
+
+.was-validated .form-control:valid, .form-control.is-valid, .was-validated .custom-select:valid, .custom-select.is-valid {
+  border-color: #aaa !important;
+}
+.was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+  color: #6c757d !important;
+}
+
+.hidden {
+  display:none;
+}

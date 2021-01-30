@@ -1,0 +1,34 @@
+.container
+  = simple_form_for [:admin, @group], url: url, html: { class: "form-horizontal" } do |f|
+    %legend= legend
+    = f.input :name
+
+    = render 'web/admin/categories/groups/products_block', form: f, products: f.object.products
+    - if @group.id.present?
+      = link_to t('.add_group_product'), new_admin_category_group_product_path(@group.category.id, @group.id), class: "btn btn-success"
+
+    %br
+    %br
+
+    = render 'web/admin/categories/groups/pilots_block', form: f, pilots: f.object.pilots
+    - if @group.id.present?
+      = link_to t('.add_group_pilot'), new_admin_category_group_pilot_path(@group.category.id, @group.id), class: "btn btn-success"
+
+      %br
+    %br
+
+    = render 'web/admin/categories/groups/testing_methods_block', form: f, testing_methods: f.object.testing_methods
+    - if @group.id.present?
+      = link_to t('.add_group_testing_method'), new_admin_category_group_testing_method_path(@group.category.id, @group.id), class: "btn btn-success"
+
+    %br
+    %br
+
+    = render 'web/admin/categories/groups/archives_block', form: f, archives: f.object.archives
+    - if @group.id.present?
+      = link_to t('.add_group_archive'), new_admin_category_group_archive_path(@group.category.id, @group.id), class: "btn btn-success"
+
+    .form-actions
+      %br
+      = f.submit class: "btn btn-primary", value: btn_title
+      = link_to "Отмена", [:admin, :categories], class: "btn"

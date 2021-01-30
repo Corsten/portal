@@ -1,0 +1,28 @@
+.container
+  = render 'web/admin/shared/notification'
+  %h1 Состав рабочей группы
+  = link_to "Добавить в рабочую группу", new_admin_working_group_member_path, class: "btn btn-info"
+
+  = render "web/admin/shared/toolbar", collection: @group_members, total_title: t('.total_members_count')
+
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :id
+        %th= sort_link @q, :full_name
+        %th= sort_link @q, :position
+        %th= han WorkingGroupMember, :photo
+
+        %th{style: 'width: 17%'} Управление
+    %tbody
+      - @group_members.each do |member|
+        %tr
+          %th{scope: :row}= member.id
+          %th= member.full_name
+          %th= member.position
+          %td= image_tag member.base64_photo, width: 100 if member.base64_photo.present?
+          %th
+            = link_to [:edit, :admin, member], class: "btn btn-success", title: "Редактировать" do
+              = fa_icon "edit"
+            = link_to [:admin, member], data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+              = fa_icon "trash"

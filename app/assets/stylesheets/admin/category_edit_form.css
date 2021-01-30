@@ -1,0 +1,30 @@
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 400px;
+    overflow-y: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    margin-bottom: 20px;
+}
+
+.classes-block-table {
+    max-height: 270px;
+}
+
+.document-block-table {
+    width: 80%;
+    max-height: 270px;
+    margin-left: 30px;
+}
+
+.groups-table.table td,
+.groups-table.table th {
+    padding: 0.4rem;
+}
+
+.form-actions.button-block {
+    margin-bottom: 20px;
+}
+
+.classes-block {
+    padding: 10px;
+}

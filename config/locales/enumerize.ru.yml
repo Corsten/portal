@@ -1,0 +1,27 @@
+ru:
+  enumerize:
+    event:
+      state:
+        scheduled: Запланировано
+        completed: Завершено
+    document:
+      kind:
+        decree: Приказ
+        protocol: Протокол
+        presentation: Презентация
+        government_decree: Постановление Правительства
+        federal_law: Федеральный закон
+        other: Прочее
+        pilot_template: Файла-шаблон для пилота
+    category/pilot:
+      status:
+        completed: Пилот завершен
+        in_process: Пилот еще идет
+        implemented: Решение внедрено
+      leader_state:
+        unknown: Не оценивалось
+        "yes": Да
+        "no": Нет
+    administrator:
+      role:
+        admin: Администратор

@@ -1,0 +1,23 @@
+- if groups.present?
+  %legend= t('.groups')
+  %h4
+    %span.badge.badge-secondary
+      = t('.groups_count', groups_count: groups.count)
+  .table-wrapper-scroll-y
+    %table.table.table-bordered.table-striped.groups-table
+      %thead
+        %tr
+          %th{scope: :col, style: "width: 5%"}= t('.id')
+          %th{scope: :col, style: "width: 60%"}= t('.name')
+          %th{scope: :col, style: "width: 5%"} Управление
+      %tbody
+        - groups.each do |group|
+          %tr
+            %th{scope: :row}= link_to group.id, edit_admin_category_group_path(group.category.id, group.id)
+            %td= group.name
+            %th
+              = link_to edit_admin_category_group_path(group.category.id, group.id), class: "btn btn-success", title: "Редактировать" do
+                = fa_icon "edit"
+
+              = link_to admin_category_group_path(group.category.id, group.id), data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+                = fa_icon "trash"

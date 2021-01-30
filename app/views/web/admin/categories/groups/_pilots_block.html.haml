@@ -1,0 +1,48 @@
+- if pilots.present?
+  %legend= t('.pilots')
+  %h4
+    %span.badge.badge-secondary
+      = t('.pilots_count', pilots_count: pilots.count)
+  .table-wrapper-scroll-y
+    %table.table.table-bordered.table-striped.groups-table
+      %thead
+        %tr
+          %th{scope: :col, style: "width: 10%"}= t('.id')
+          %th{scope: :col, style: "width: 30%"}= t('.customer_name')
+          %th{scope: :col, style: "width: 30%"}= t('.supplier_name')
+          %th{scope: :col, style: "width: 30%"}= t('.software_name')
+          %th{scope: :col, style: "width: 30%"}= t('.manufacturer_name')
+          %th{scope: :col, style: "width: 30%"}= t('.in_rsr')
+          %th{scope: :col, style: "width: 30%"}= t('.leader_state')
+          %th{scope: :col, style: "width: 30%"}= t('.registry_link')
+          %th{scope: :col, style: "width: 30%"}= t('.unfunctional_requirements')
+          %th{scope: :col, style: "width: 30%"}= t('.functional_requirements')
+          %th{scope: :col, style: "width: 30%"}= t('.status')
+          %th{scope: :col, style: "width: 30%"}= t('.result')
+          %th{scope: :col, style: "width: 30%"}= t('.notes')
+          %th{scope: :col, style: "width: 30%"}= t('.manufacturer_link')
+          %th{scope: :col, style: "width: 30%"}= t('.customer_link')
+          %th Управление
+      %tbody
+        - pilots.each do |pilot|
+          %tr
+            %th{scope: :row}= link_to pilot.id, edit_admin_category_group_pilot_path(pilot.group.category.id, pilot.group.id, pilot.id)
+            %td= pilot.customer_name
+            %td= pilot.supplier_name
+            %td= pilot.software_name
+            %td= pilot.manufacturer_name
+            %td= pilot.in_rsr
+            %td= pilot.leader_state_text
+            %td= pilot.registry_link
+            %td= pilot.unfunctional_requirements
+            %td= pilot.functional_requirements
+            %td= pilot.status_text
+            %td= pilot.result
+            %td= pilot.notes
+            %td= pilot.manufacturer_link
+            %td= pilot.customer_link
+            %th
+              = link_to edit_admin_category_group_pilot_path(pilot.group.category.id, pilot.group.id, pilot.id), class: "btn btn-success", title: "Редактировать" do
+                = fa_icon "edit"
+              = link_to admin_category_group_pilot_path(pilot.group.category.id, pilot.group.id, pilot.id), data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+                = fa_icon "trash"

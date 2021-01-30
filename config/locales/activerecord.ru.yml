@@ -1,0 +1,219 @@
+ru:
+  attributes:
+    id: Id
+    surname: Фамилия
+    name: Имя
+    patronymic: Отчество
+    email: Email
+    password: Пароль
+    password_confirmation: Повтор пароля
+    state: Состояние
+
+  activerecord:
+    errors:
+      models:
+        working_group_member:
+          attributes:
+            full_name:
+              blank: ФИО не может быть пустым
+            organization:
+              blank: Организация не может быть пустой
+            position:
+              blank: Должность не может быть пустой
+
+        administrator:
+          attributes:
+            surname:
+              blank: Фамилия не может быть пустой
+            name:
+              blank: Имя не может быть пустым
+            email:
+              blank: Email не может быть пустым
+              email: имеет некорректный формат
+            password:
+              must_minimum_length: "должен состоять не менее чем из %{length} символов"
+              must_contains_symbols: должен содержать прописные буквы (a-z), строчные буквы (A-Z) и цифры (0-9)
+              must_not_contains_email: не должен содержать имя учётной записи
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: не совпадает
+            email:
+              email: имеет некорректный формат
+              blank: Email не может быть пустым
+              taken: Данный email уже зарегистрирован в системе, вы можете войти или востановить пароль
+            phone_number:
+              phone_number: "Номер телефона имеет некорректный формат. Необходимый формат - +7 000 000-00-00"
+            password:
+              must_minimum_length: "должен состоять не менее чем из %{length} символов"
+              must_contains_symbols: должен содержать прописные буквы (a-z), строчные буквы (A-Z) и цифры (0-9)
+              must_not_contains_email: не должен содержать имя учётной записи
+            position:
+              blank: Должность не может быть пустой
+            organization:
+              blank: Организация не может быть пустой
+            full_name:
+              blank: Имя не может быть пустым
+
+        document:
+          attributes:
+            name:
+              blank: Название документа не может быть пустым
+            kind:
+              blank: Тип документа не может быть пустым
+            document:
+              blank: Нужно приложить документ
+
+        event:
+          attributes:
+            name:
+              blank: Название события не может быть пустым
+            date:
+              blank: Дата события не может быть пустым
+            time:
+              blank: Время события не может быть пустым
+            place:
+              blank: Место проведения не может быть пустым
+            description:
+              blank: Описание мероприятия не может быть пустым
+            topics:
+              blank: Темы не могут быть пустыми
+            address:
+              blank: Адрес не может быть пустым
+            organizer:
+              blank: Организатор не может быть пустым
+
+        category:
+          attributes:
+            name:
+              blank: Название не может быть пустым
+
+        category/group:
+          attributes:
+            name:
+              blank: Название не может быть пустым
+
+        category/product:
+          attributes:
+            name:
+              blank: Название не может быть пустым
+            manufacturer:
+              blank: Производитель не может быть пустым
+            link:
+              blank: Ссылка не может быть пустой
+            rating:
+              blank: Рейтинг не может быть пустым
+            document:
+              blank: Нужно приложить документ
+
+        category/pilot:
+          attributes:
+            customer_name:
+              blank: Наименование организации-заказчика не может быть пустым
+            software_name:
+              blank: Наименование ПО
+            leader_state:
+              blank: Выберите
+            unfunctional_requirements:
+              blank: Нефункциональные требования не могут быть пустыми
+            functional_requirements:
+              blank: Функциональные требования не могут быть пустыми
+            status:
+              blank: Статус не может быть пустыми
+
+        category/pilot/import:
+          attributes:
+            document:
+              blank: Нужно приложить документ
+        category/testing_method:
+          attributes:
+            customer_name:
+              blank: Наименование организации-заказчика - обязательное поле
+            document:
+              blank: Нужно приложить документ
+
+    attributes:
+      administrator:
+        role: Роль
+        state: Статус
+        actual: Активный
+        blocked: Заблокированный
+        deleted: Удалённый
+        email: Электронная почта
+        new_pilots_notification: Получать уведомления о импорте новых пилотов
+        new_users_notification: Получать уведомления о регистрации новых пользователей
+        new_testing_methods_notification: Получать уведомления о импорте новых методик тестирования
+        new_event_claim_notification: Получать уведомления о регистрации на события в календаре
+      category:
+        enable_pilots: Отображать в реестре пилотов
+        enable_products: Отображать в карте технологий
+        enable_testing_methods: Отображать в реестре методик
+        enable_archives: Отображать в архиве
+      user:
+        id: ID
+        full_name: ФИО
+        phone_number: Телефон
+        organization: Организация
+        position: Должность
+        created_at: Дата регистрации
+        state: Статус
+        actual: Активный
+        blocked: Заблокированный
+        deleted: Удалённый
+        need_recover_pass: Нужно сменить пароль
+      category/product:
+        name: Название
+        manufacturer: Производитель
+        link: Ссылка
+        rating: Рейтинг
+      category/testing_method:
+        customer_name: Наименование организации-заказчика
+        notes: Примечания
+        testing_method_document: Файл с методикой тестирования
+      category/archive:
+        customer_name: Наименование организации-заказчика
+        notes: Примечания
+        archive_document: Файл с описанием
+      category/pilot:
+        customer_name: Наименование организации-заказчика
+        supplier_name: Наименование организации-поставщика (Внедренца)
+        software_name: Наименование ПО
+        manufacturer_name: Наименование компании-производителя
+        in_rsr: Наличие ПО в реестре Российского ПО
+        registry_link: Ссылка на реестр при наличии
+        leader_state: Лидер в классе (экспертно)
+        status: Статус
+        result: Результаты пилотирования/внедрения
+        unfunctional_requirements: Основные нефункциональные требования
+        functional_requirements: Основные функциональные требования
+        name_inside_method: Наименование внутри метода
+        notes: Примечания
+        manufacturer_link: Ссылка на сайт производителя
+        customer_link: Ссылка на сайт заказчика
+      document:
+        name: Название документа
+        id: ID
+        kind: Тип
+        document_date: Дата документа
+        document_link: Ссылка на скачивание
+        show_in_main_page: Показать на главной старнице
+      event:
+        name: Название события
+        id: ID
+        place: Место проведения
+        date: Дата проведения
+        time: Время проведения
+        description: Описание мероприятия
+        topics: Темы
+        address: Адрес
+        datetime: Время проведения
+      working_group_member:
+        full_name: ФИО
+        organization: Организация
+        position: Должность
+        photo: Фотография
+        organizer: Организатор
+      event/claim:
+        user_id: ID пользователя
+        full_name: ФИО
+        phone_number: Номер телефона

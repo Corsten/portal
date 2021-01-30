@@ -1,0 +1,23 @@
+default: &default
+  host: <%= ENV.fetch("POSTGRESQL_HOST") { 'localhost' } %>
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV.fetch("POSTGRESQL_USER") { 'postgres' } %>
+  password: <%= ENV.fetch("POSTGRESQL_PASSWORD") { '' } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: retailhub_development
+
+test:
+  <<: *default
+  database: v_test
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRESQL_DATABASE_NAME") { 'retailhub_backend_production' } %>
+
+staging:
+  <<: *default
+  database: <%= ENV.fetch("POSTGRESQL_DATABASE_NAME") { 'retailhub_staging' } %>

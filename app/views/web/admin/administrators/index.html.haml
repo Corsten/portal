@@ -1,0 +1,28 @@
+.container
+  %h1 Администраторы
+  - if policy(Administrator).new?
+    = link_to "Добавить администратора", new_admin_administrator_path, class: "btn btn-info"
+  = render "web/admin/shared/toolbar", collection: @administrators, total_title: t('.total_administrator_count')
+  %br
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :id
+        %th= sort_link @q, :surname, 'ФИО'
+        %th= sort_link @q, :email
+        %th= sort_link @q, :role
+        %th Управление
+    %tbody
+      - @administrators.each do |administrator|
+        %tr
+          %th{scope: :row}= administrator.id
+          %th= [administrator.surname, administrator.name, administrator.patronymic].join(" ")
+          %th= administrator.email
+          %th= administrator.role_text
+          %th
+            - if policy(administrator).edit?
+              = link_to [:edit, :admin, administrator], class: "btn btn-success", title: "Редактировать" do
+                = fa_icon "edit"
+            - if policy(administrator).destroy?
+              = link_to [:admin, administrator], data: { method: :delete, confirm: "Вы уверены?" }, class: "btn btn-danger", title: "Удалить" do
+                = fa_icon "trash"

@@ -1,0 +1,28 @@
+.container
+  = render 'web/admin/shared/notification'
+  %h1 Заявки на события
+
+  = render "web/admin/shared/toolbar", collection: @events_claims, total_title: t('.total_event_count')
+
+  %table.table
+    %thead
+      %tr
+        %th= sort_link @q, :id
+        %th= sort_link @q, :full_name
+        %th= sort_link @q, :email
+        %th= t('.phone_number')
+        %th{style: 'width: 17%'} Управление
+    %tbody
+      - @events_claims.each do |claim|
+        %tr
+          %th= claim.id
+          %th= claim.full_name
+          %th= claim.email
+          %th= claim.phone_number
+          %th
+            - if claim.can_block?
+              = link_to block_admin_events_claim_path(claim), method: :post, class: "btn btn-warning", title: "Отменить регистрацию" do
+                = fa_icon "lock"
+            - if claim.can_unblock?
+              = link_to unblock_admin_events_claim_path(claim), method: :post, class: "btn btn-warning", title: "Подтвердить регистрацию" do
+                = fa_icon "unlock"

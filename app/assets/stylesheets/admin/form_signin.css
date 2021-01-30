@@ -1,0 +1,14 @@
+.form-wrapper {
+  text-align: center !important;
+}
+
+.form-wrapper .rt-logo {
+  max-height: 200px;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}

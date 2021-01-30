@@ -1,0 +1,8 @@
+.form-wrapper
+  = render 'web/admin/shared/notification'
+  %p.mt-5.mb-3
+  = simple_form_for :administrator, url: admin_session_path, html: {class: "form-signin"} do |f|
+    = f.input :email, label: false, input_html: {class: "form-control", placeholder: "E-mail"}
+    = f.input :password, label: false, input_html: {class: "form-control", placeholder: "Пароль"}
+    %p.mt-5.mb-3
+    = f.button :button, "Войти", class: "btn btn-primary btn-block"

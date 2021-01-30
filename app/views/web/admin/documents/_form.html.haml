@@ -1,0 +1,22 @@
+= render 'web/admin/shared/notification'
+.container
+  .row
+    .col-sm-12
+      = simple_form_for [:admin, @document], html: { class: "form-horizontal" } do |f|
+        %legend= legend
+        = f.input :name
+        = f.input :kind
+        = f.input :document_date, as: :datetimepicker, placeholder: false, input_html: { datepicker: true }
+
+        = f.input :show_in_main_page, as: :boolean
+
+        = f.input :document, as: :file, label: t(".document")
+        = f.input :document_cache, as: :hidden
+
+        - if f.object.document.present?
+          %p= link_to t('.show_document'), admin_file_path(f.object.document), target: :_blank
+
+        .form-actions
+
+          = f.submit class: "btn btn-primary", value: btn_title
+          = link_to "Отмена", [:admin, :documents], class: "btn"

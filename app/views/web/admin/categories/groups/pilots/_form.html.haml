@@ -1,0 +1,26 @@
+.container
+  - p url
+  = simple_form_for [:admin, @pilot], url: url, html: { class: "form-horizontal" } do |f|
+    %legend= legend
+    = f.input :customer_name
+    = f.input :supplier_name
+    = f.input :software_name
+    = f.input :manufacturer_name
+    = f.input :in_rsr, as: :boolean
+
+    = f.input :leader_state
+
+    = f.input :status
+    = f.input :result
+
+    = f.input :registry_link
+    = f.input :unfunctional_requirements, as: :text
+    = f.input :functional_requirements, as: :text
+    = f.input :notes, as: :text
+    = f.input :manufacturer_link
+    = f.input :customer_link
+
+    .form-actions
+      %br
+      = f.submit class: "btn btn-primary", value: btn_title
+      = link_to "Отмена", [:admin, :categories], class: "btn"

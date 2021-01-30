@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-sm-12
+      = simple_form_for @event_claim, url: edit_admin_events_claim_path, html: { class: "form-horizontal" } do |f|
+        = f.input :full_name, disabled: true
+        = f.input :email, disabled: true
+        = f.input :phone_number, disabled: true
+
+        .form-actions
+          - if @event_claim.id
+            .user_approve
+              - if @event_claim.can_block?
+                = link_to block_admin_events_claim_path(@event_claim), method: :post, class: "btn btn-warning", title: "Отменить регистрацию" do
+                  = "Отменить регистрацию"
+                  = fa_icon "lock"
+
+              - if @event_claim.can_unblock?
+                = link_to unblock_admin_events_claim_path(@event_claim), method: :post, class: "btn btn-warning", title: "Подтвердить регистрацию" do
+                  = "Подтвердить регистрацию"
+                  = fa_icon "unlock"
+          %br
+          = link_to "Отмена", [:admin, :events_claims], class: "btn"

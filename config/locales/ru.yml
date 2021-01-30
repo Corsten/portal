@@ -1,0 +1,132 @@
+ru:
+  'true': Да
+  'false': Нет
+  views:
+    pagination:
+      first: Первая
+      last: Последняя
+      previous: Предыдущая
+      next: Следующая
+      truncate: "..."
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+      full: "%d.%m.%Y %H:%M:%S"
+      only_date: "%d.%m.%Y"
+      only_time: "%H:%M"
+      schema: "%Y-%m-%d %H:%M:%S"
+      report: "%d-%m-%Y %H:%M:%S"
+  errors:
+    format: "%{message}"
+    messages:
+      extension_white_list_error: Формат загружаемого файла не соответствует шаблону, просим проверить правильность заполненных данных и повторить загрузку, в случае возникновения вопросов, просим связаться с нами по e-mail
+      wrong_size: Не корректный размер файла
+      size_too_small: Файл слишком маленький
+      size_too_big: "Размер файла превышает допустимый (Не должен превышать %{file_size})"
+
+  web:
+    admin:
+      administrators:
+        index:
+          total_administrator_count: 'Найдено администраторов:'
+      users:
+        index:
+          total_user_count: 'Найдено пользователей:'
+
+      categories:
+        groups:
+          form:
+            add_group_product: Добавить ПО в этот класс
+            add_group_pilot: Добавить пилот в этот класс
+            add_group_testing_method: Добавить методику тестирования в этот класс
+            add_group_archive: Добавить запись в раздел архив
+          products_block:
+            id: ID
+            name: Название
+            products: Программное обеспечение
+            products_count: 'Количество ПО:'
+          archives_block:
+            archive_count: "Количество записей: %{archives_count}"
+            archives: Записи в разделе архив
+            customer_name: Наименование организации-заказчика
+            notes: Примечания
+            id: ID
+          testing_methods_block:
+            testing_methods: Методики тестирования
+            testing_methods_count: "Количество методик: %{testing_methods_count}"
+            customer_name: Наименование организации-заказчика
+            notes: Примечания
+          products:
+            form:
+              product_document: 'Файл с описанием опыта внедрения:'
+              show_document: Открыть документ
+          archives:
+            form:
+              archive_document: 'Файл с описанием:'
+              show_document: Открыть документ
+          testing_methods:
+            form:
+              testing_method_document: 'Файл с описанием методики тестирования:'
+              show_document: Открыть документ
+          pilots_block:
+            id: ID
+            pilots: Реестр пилотов
+            pilots_count: 'Количество пилотов в реестре:'
+            customer_name: Наименование организации-заказчика
+            supplier_name: Наименование организации-поставщика (Внедренца)
+            software_name: Наименование ПО
+            manufacturer_name: Наименование компании-производителя
+            in_rsr: Наличие ПО в реестре Российского ПО
+            registry_link: Ссылка на реестр при наличии
+            leader_state: Лидер в классе (экспертно)
+            status: Статус
+            result: Результаты пилотирования/внедрения
+            unfunctional_requirements: Основные нефункциональные требования
+            functional_requirements: Основные функциональные требования
+            name_inside_method: Наименование внутри метода
+            notes: Примечания
+            manufacturer_link: Ссылка на сайт производителя
+            customer_link: Ссылка на сайт заказчика
+        form:
+          add_category_group: Добавить класс в эту категорию
+        groups_block:
+          id: ID
+          name: Название класса
+          groups: Классы ПО в категории
+          groups_count: "Всего классов в категории: %{groups_count}"
+      working_group_members:
+        form:
+          photo: Фотография
+          show_photo: Открыть фотографию
+        index:
+          id: ID
+          full_name: ФИО
+          organization: Организация
+          position: Должность
+          photo: Фотография
+          total_members_count: 'Всего:'
+      documents:
+        form:
+          show_document: Посмотреть документ
+          document: Файл
+        index:
+          total_document_count: 'Количество документов:'
+          id: ID
+      events:
+        modal_topic:
+          add_topic: Добавление темы
+          add: Добавить
+          cancel: Отмена
+
+        index:
+          total_event_count: 'Количество событий в календаре:'
+
+        claims:
+          index:
+            phone_number: Номер телефона
+            total_event_claims: 'Найдено заявок:'
+
+      events_claims:
+        index:
+          phone_number: Номер телефона
+          total_event_count: 'Количество заявок:'

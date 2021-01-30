@@ -1,0 +1,15 @@
+ru:
+  flashes:
+    event:
+      claim:
+        unblock: Подтверждена регистрация
+        block: Отменена регистрация
+    user:
+      block: "Вы заблокировали пользователя id: %{id}"
+      unblock: "Вы разблокировали пользователя id: %{id}"
+    sessions:
+      create:
+        user_blocked: Пользователь заблокирован, попробуйте снова через 5 минут
+        not_found_user: Пользователь не найден
+        fail_login_invalid_password: Неверный логин или пароль пользователя
+        not_found_administrator: Администратор не найден
